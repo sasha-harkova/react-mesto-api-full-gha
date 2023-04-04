@@ -7,7 +7,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.87.126
+IP 51.250.87.126
 
 Frontend https://mesto.harkova.nomoredomains.work/
 

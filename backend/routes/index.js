@@ -18,5 +18,4 @@ router.use(() => {
   throw new NotFoundError(error404Message);
 });
 
-
 module.exports = router;
