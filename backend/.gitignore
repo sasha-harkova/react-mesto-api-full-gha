@@ -12,5 +12,8 @@ node_modules
 # Optional REPL history
 .DS_Store
 .idea
-.vscode 
-.env 
+.vscode
+.env
+.env.example
+.env.local
+.env.staging
