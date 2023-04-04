@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
-const cors = require('cors');
+const cors = require('./middlewares/cors');
 
 const { PORT, DB_ADDRESS } = require('./config');
 
@@ -18,13 +18,20 @@ mongoose.connect(DB_ADDRESS, {
 });
 
 app.use(helmet());
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors);
 app.use(bodyParser.json());
 app.use(requestLogger);
 app.use(router);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
+
+
 
 app.listen(PORT, () => {
   console.log(1);

@@ -7,14 +7,14 @@ const error404Message = 'Карточка с указанным _id не най�
 
 function getCards(req, res, next) {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch(next);
 }
 
 function createCard(req, res, next) {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch(next);
 }
 
@@ -24,7 +24,7 @@ function deleteCard(req, res, next) {
     .then((card) => {
       if (card.owner.toString() === req.user._id) {
         Card.deleteOne(card)
-          .then((ownerCard) => res.send({ data: ownerCard }))
+          .then((ownerCard) => res.send(ownerCard))
           .catch(next);
       } else {
         throw new TryingIsFailed(error403Message);
@@ -43,7 +43,7 @@ function likeCard(req, res, next) {
       if (card === null) {
         throw new NotFoundError(error404Message);
       }
-      return res.send({ data: card });
+      return res.send(card);
     })
     .catch(next);
 }
@@ -58,7 +58,7 @@ function dislikeCard(req, res, next) {
       if (card === null) {
         throw new NotFoundError(error404Message);
       }
-      return res.send({ data: card });
+      return res.send(card);
     })
     .catch(next);
 }

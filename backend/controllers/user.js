@@ -9,7 +9,7 @@ const error404Message = 'Пользователь по указанному _id 
 
 function getUsers(req, res, next) {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch(next);
 }
 
@@ -19,7 +19,7 @@ function getUserById(req, res, next) {
       if (user === null) {
         throw new NotFoundError(error404Message);
       }
-      return res.send({ data: user });
+      return res.send(user);
     })
     .catch(next);
 }
@@ -30,7 +30,7 @@ function getCurrentUser(req, res, next) {
       if (user === null) {
         throw new NotFoundError(error404Message);
       }
-      return res.send({ data: user });
+      return res.send(user);
     })
     .catch(next);
 }
@@ -64,7 +64,7 @@ function updateProfile(req, res, next) {
       if (user === null) {
         throw new NotFoundError(error404Message);
       }
-      return res.send({ data: user });
+      return res.send(user);
     })
     .catch(next);
 }
@@ -83,7 +83,7 @@ function updateAvatar(req, res, next) {
       if (user === null) {
         throw new NotFoundError(error404Message);
       }
-      return res.send({ data: user });
+      return res.send(user);
     })
     .catch(next);
 }
@@ -93,7 +93,7 @@ function login(req, res, next) {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET,  { expiresIn: '7d' });
       res.send({ token });
     })
     .catch(next);

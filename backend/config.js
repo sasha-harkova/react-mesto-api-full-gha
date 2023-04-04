@@ -1,11 +1,16 @@
 require('dotenv').config();
 
-const { PORT = 'PORT' || 3000} = process.env;
-const { DB_ADDRESS = 'DB_ADDRESS' ||  'mongodb://127.0.0.1:27017/mestodb'} = process.env;
-const { JWT_SECRET = 'JWT_SECRET' || 'some-secret-key'} = process.env;
+const PORT = process.env.PORT || 3000;
+const DB_ADDRESS = process.env.DB_ADDRESS || 'mongodb://127.0.0.1:27017/mestodb';
+
+if (process.env.NODE_ENV === "production") {
+  JWT_SECRET = process.env.JWT_SECRET
+} else {
+  JWT_SECRET = "secret-key"
+}
 
 module.exports = {
   PORT,
-  JWT_SECRET,
   DB_ADDRESS,
+  JWT_SECRET,
 };
